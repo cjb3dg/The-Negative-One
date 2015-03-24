@@ -10,6 +10,12 @@ namespace Platformer
         private List<Invertible> invertibles;
         private bool worldInverted = false;
 
+        // negative world objects
+        private List<Invertible> negatives;
+
+        // positive world objects
+        private List<Invertible> positives;
+
         public InversionManager()
         {
             if (invertibles == null)
