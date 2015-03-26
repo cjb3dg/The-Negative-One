@@ -70,7 +70,7 @@ namespace Platformer
 
         public void Draw(SpriteBatch sb, Player player1)
         {
-            if (player1.inverted == false)
+            if (player1.IsInverted == false)
             {
                 sb.Draw(image, new Rectangle(spriteX, spriteY, spriteWidth, spriteHeight), Color.White); //Add array of sprites, choose which one to call
             }

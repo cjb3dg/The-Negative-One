@@ -15,14 +15,8 @@ namespace Platformer
 		protected Texture2D image;
         protected bool ofInverseWorld;
 
-		public Sprite(Texture2D image, int spriteWidth, int spriteHeight, int spriteX, int spriteY, bool ofInverseWorld)
+		public Sprite()
 		{
-            this.image = image;
-            this.spriteWidth = spriteWidth;
-            this.spriteHeight = spriteHeight;
-            this.spriteX = spriteX;
-            this.spriteY = spriteY;
-            this.ofInverseWorld = ofInverseWorld;
 		}
 
         public virtual void Draw(SpriteBatch sb)

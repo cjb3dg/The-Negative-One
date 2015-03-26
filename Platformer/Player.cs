@@ -80,7 +80,7 @@ namespace Platformer
         {
 
             if (controls.onPress(Keys.Space, Buttons.A))
-                inverted = !inverted;
+                IsInverted = !IsInverted;
 
         }
 		public void Move(Controls controls, Obstacle[] oList)
@@ -141,12 +141,12 @@ namespace Platformer
                 grounded = true;
                 return;
             }
-            else if (spriteY >= 247 && spriteY <= 253 && spriteX > 200 && spriteX < 450 && y_vel >= 0 && inverted == true)
+            else if (spriteY >= 247 && spriteY <= 253 && spriteX > 200 && spriteX < 450 && y_vel >= 0 && IsInverted == true)
             {
                 grounded = true;
                 return;
             }
-            else if (spriteY >= 147 && spriteY <= 153 && spriteX > 350 && spriteX < 600 && y_vel >= 0 && inverted == false)
+            else if (spriteY >= 147 && spriteY <= 153 && spriteX > 350 && spriteX < 600 && y_vel >= 0 && IsInverted == false)
             {
                 grounded = true;
                 return;

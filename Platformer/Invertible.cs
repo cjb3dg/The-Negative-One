@@ -10,15 +10,15 @@ namespace Platformer
     /* All non-neutral objects */
     abstract class Invertible : Sprite
     {
-        public bool inverted { get; private set; } /* inverted = of inverse world */
+        public bool IsInverted { get; set; } /* inverted = of inverse world */
 
         protected bool allowInversion = true; /* should be false for objects without dual-states */
 
         protected Texture2D image_i;
 
-        public override virtual void Draw(SpriteBatch sb)
+        public override void Draw(SpriteBatch sb)
         {
-            if (!inverted)
+            if (!IsInverted)
             {
                 sb.Draw(image, new Rectangle(spriteX, spriteY, spriteWidth, spriteHeight), Color.White);
             }
@@ -32,7 +32,7 @@ namespace Platformer
         {
             if (allowInversion)
             {
-                inverted = !inverted;
+                IsInverted = !IsInverted;
             }
         }
 

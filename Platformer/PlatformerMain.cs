@@ -117,13 +117,13 @@ namespace Platformer
 
             player1.Update(controls, gameTime, oList);
 
-            if (controls.onPress(Keys.Space, Buttons.A) && inversionManager.worldInverted)
+            if (controls.onPress(Keys.Space, Buttons.A) && inversionManager.IsWorldInverted)
             {
                 backSong_i.Volume = 0;
                 backSong.Volume = 1;
 
             }
-            else if (!inversionManager.worldInverted && controls.onPress(Keys.Space, Buttons.A))
+            else if (!inversionManager.IsWorldInverted && controls.onPress(Keys.Space, Buttons.A))
             {
                 backSong_i.Volume = 1;
                 backSong.Volume = 0;
@@ -145,7 +145,7 @@ namespace Platformer
         protected override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            if (!inversionManager.worldInverted)
+            if (!inversionManager.IsWorldInverted)
             {
                 GraphicsDevice.Clear(Color.White);
                 spriteBatch.Draw(Content.Load<Texture2D>("Goal"), new Rectangle(700, 50, 50, 50), Color.White);

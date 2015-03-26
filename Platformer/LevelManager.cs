@@ -85,7 +85,7 @@ namespace Platformer
                 Sprite obj = objects[i];
                 if (obj is Invertible)
                 {
-                    if (((Invertible)obj).inverted == inversionManager.worldInverted)
+                    if (((Invertible)obj).IsInverted == inversionManager.IsWorldInverted)
                     {
                         obj.Draw(sb);
                     }
