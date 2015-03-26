@@ -41,6 +41,7 @@
     <Compile Include="Invertible.cs" />
     <Compile Include="Controls.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="LevelManager.cs" />
     <Compile Include="MovementPattern.cs" />
     <Compile Include="Obstacle.cs" />
     <Compile Include="PlatformerMain.cs" />
@@ -95,8 +96,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
-    <Content Include="OpenAL32.dll" />
+    <Content Include="OpenAL32.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="SDL.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="wrap_oal.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

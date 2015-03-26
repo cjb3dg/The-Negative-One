@@ -7,24 +7,24 @@ namespace Platformer
 {
     class InversionManager
     {
-        private List<Invertible> invertibles;
-        private bool worldInverted = false;
+        /* is the world inverted. True = negative world; False = normal world */
+        public bool worldInverted { get; private set; }
 
-        // negative world objects
-        private List<Invertible> negatives;
-
-        // positive world objects
-        private List<Invertible> positives;
+        /* all non-neutrals */
+        public List<Invertible> invertibles { get; private set; }
 
         public InversionManager()
         {
+            worldInverted = false;
             if (invertibles == null)
             {
                 invertibles = new List<Invertible>();
             }
         }
 
-        public void sendInversionEvent() {
+        public void invert()
+        {
+            worldInverted = !worldInverted;
             for (int i = 0; i < invertibles.Count; i++)
             {
                 invertibles[i].invert();

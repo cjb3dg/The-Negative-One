@@ -23,16 +23,13 @@ namespace Platformer
         SpriteBatch spriteBatch;
         Player player1;
         Controls controls;
+        private InversionManager inversionManager;
+        private LevelManager levelManager;
         private Obstacle[] oList = new Obstacle[4];
         private static SoundEffect song;
         private static SoundEffect song_i;
         private static SoundEffectInstance backSong;
         private static SoundEffectInstance backSong_i;
-
-
-
-
-
 
         public PlatformerMain()
         {
@@ -57,6 +54,8 @@ namespace Platformer
             Console.WriteLine("Number of joysticks: " + Sdl.SDL_NumJoysticks());
             controls = new Controls();
 
+            inversionManager = new InversionManager();
+            levelManager = new LevelManager(inversionManager, player1);
         }
 
         /// <summary>
@@ -118,13 +117,13 @@ namespace Platformer
 
             player1.Update(controls, gameTime, oList);
 
-            if (controls.onPress(Keys.Space, Buttons.A) && !player1.inverted)
+            if (controls.onPress(Keys.Space, Buttons.A) && inversionManager.worldInverted)
             {
                 backSong_i.Volume = 0;
                 backSong.Volume = 1;
 
             }
-            else if (player1.inverted && controls.onPress(Keys.Space, Buttons.A))
+            else if (!inversionManager.worldInverted && controls.onPress(Keys.Space, Buttons.A))
             {
                 backSong_i.Volume = 1;
                 backSong.Volume = 0;
@@ -146,7 +145,7 @@ namespace Platformer
         protected override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            if (player1.inverted == false)
+            if (!inversionManager.worldInverted)
             {
                 GraphicsDevice.Clear(Color.White);
                 spriteBatch.Draw(Content.Load<Texture2D>("Goal"), new Rectangle(700, 50, 50, 50), Color.White);

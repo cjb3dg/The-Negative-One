@@ -7,17 +7,18 @@ using Microsoft.Xna.Framework;
 
 namespace Platformer
 {
-    class Invertible : Sprite
+    /* All non-neutral objects */
+    abstract class Invertible : Sprite
     {
-        public bool inverted = false;
-        public bool invertible = true;
+        public bool inverted { get; private set; } /* inverted = of inverse world */
 
-        public Texture2D image_i;
-        public MovementPattern movement_i;
+        protected bool allowInversion = true; /* should be false for objects without dual-states */
 
-        public void Draw(SpriteBatch sb)
+        protected Texture2D image_i;
+
+        public override virtual void Draw(SpriteBatch sb)
         {
-            if (inverted == false)
+            if (!inverted)
             {
                 sb.Draw(image, new Rectangle(spriteX, spriteY, spriteWidth, spriteHeight), Color.White);
             }
@@ -29,20 +30,21 @@ namespace Platformer
 
         public void invert()
         {
-            if (invertible)
+            if (allowInversion)
             {
                 inverted = !inverted;
             }
         }
 
+        /* prevents inversion */
         public void lockInversion()
         {
-            invertible = false;
+            allowInversion = false;
         }
 
         public void unlockInversion()
         {
-            invertible = true;
+            allowInversion = true;
         }
     }
 }
