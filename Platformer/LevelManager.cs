@@ -44,19 +44,37 @@ namespace Platformer
             Texture2D platformGrey = contentManager.Load<Texture2D>("Platform_grey");
             Texture2D platformBlack = contentManager.Load<Texture2D>("Platform_black");
             Texture2D platformWhite = contentManager.Load<Texture2D>("Platform_white");
-            Obstacle neutralObstacle = new Obstacle(100, 400, 200, 50, platformGrey, platformGrey);
-            Obstacle neutralObstacle2 = new Obstacle(550, 100, 200, 50, platformGrey, platformGrey);
+
+            Obstacle neutralObstacle = new Obstacle(123, 284, 50, 50, platformGrey, platformGrey);
+            Obstacle neutralObstacle2 = new Obstacle(250, 332, 50, 50, platformGrey, platformGrey);
+            Obstacle neutralObstacle3 = new Obstacle(387, 137, 50, 350, platformGrey, platformGrey);
             neutralObstacle.setNeutral();
             neutralObstacle2.setNeutral();
+            neutralObstacle3.setNeutral();
+
+            Obstacle blackObstacle = new Obstacle(123, 332, 50, 150, platformBlack, platformBlack);
+            Obstacle blackObstacle2 = new Obstacle(250, 50, 50, 50, platformBlack, platformBlack);
+            Obstacle blackObstacle3 = new Obstacle(595, 284, 50, 50, platformBlack, platformBlack);
+            blackObstacle.IsInverted = true;
+            blackObstacle2.IsInverted = true;
+            blackObstacle3.IsInverted = true;
+
+            Obstacle whiteObstacle = new Obstacle(250, 180, 50, 50, platformWhite, platformWhite);
+            Obstacle whiteObstacle2 = new Obstacle(513, 182, 50, 50, platformWhite, platformWhite);
+            Obstacle whiteObstacle3 = new Obstacle(512, 373, 50, 50, platformWhite, platformWhite);
+
+            //Texture2D goal = contentManager.Load<Texture2D>("Goal");
+            //Texture2D goal_i = contentManager.Load<Texture2D>("Goal_i");
+
             addObject(neutralObstacle);
             addObject(neutralObstacle2);
-            Obstacle whiteObstacle = new Obstacle(250, 300, 200, 50, platformWhite, platformWhite);
+            addObject(neutralObstacle3);
             addObject(whiteObstacle);
-            Obstacle blackObstacle = new Obstacle(400, 200, 200, 50, platformBlack, platformBlack);
-            blackObstacle.IsInverted = true;
+            addObject(whiteObstacle2);
+            addObject(whiteObstacle3);
             addObject(blackObstacle);
-            Texture2D goal = contentManager.Load<Texture2D>("Goal");
-            Texture2D goal_i = contentManager.Load<Texture2D>("Goal_i");
+            addObject(blackObstacle2);
+            addObject(blackObstacle3);
 
             characterManager.Load();
         }

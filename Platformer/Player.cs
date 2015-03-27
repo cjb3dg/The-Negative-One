@@ -28,6 +28,8 @@ namespace Platformer
         private int cooldown;
         public int maxHP;
         public int curHP;
+        private int floorHeight = 480;
+
         public Player(int x, int y, int width, int height)
         {
             this.spriteX = x;
@@ -38,6 +40,8 @@ namespace Platformer
             this.maxHP = 1000;
             this.curHP = 1000;
             this.cooldown = 0;
+
+            floorHeight -= this.spriteHeight;
 
             grounded = false;
             moving = false;
@@ -230,9 +234,9 @@ namespace Platformer
                     }
                 }
             }
-            if (spriteY >= 400)
+            if (spriteY >= floorHeight)
             {
-                spriteY = 400;
+                spriteY = floorHeight;
                 grounded = true;
                 return;
             }
@@ -254,13 +258,12 @@ namespace Platformer
             // Jump on button press
             if (controls.onPress(Keys.Up, Buttons.DPadUp) && grounded)
             {
-                y_vel = -11;
+                y_vel = -13;
                 jumpPoint = (int)(gameTime.TotalGameTime.TotalMilliseconds);
                 grounded = false;
             }
-
             // Cut jump short on button release
-            else if (controls.onRelease(Keys.Space, Buttons.A) && y_vel < 0)
+            else if (controls.onRelease(Keys.Up, Buttons.A) && y_vel < 0)
             {
                 y_vel /= 2;
             }
