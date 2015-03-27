@@ -21,11 +21,11 @@ namespace Platformer
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Player player1;
         Controls controls;
-        private InversionManager inversionManager;
-        private LevelManager levelManager;
         private Obstacle[] oList = new Obstacle[4];
+        CharacterManager characterManager;
+        LevelManager levelManager;
+        InversionManager inversionManager;
         private static SoundEffect song;
         private static SoundEffect song_i;
         private static SoundEffectInstance backSong;
@@ -34,6 +34,9 @@ namespace Platformer
         public PlatformerMain()
         {
             graphics = new GraphicsDeviceManager(this);
+            inversionManager = new InversionManager();
+            characterManager = new CharacterManager(levelManager, inversionManager, Content);
+            levelManager = new LevelManager(inversionManager, characterManager, Content);
             Content.RootDirectory = "Content";
         }
 
@@ -47,15 +50,12 @@ namespace Platformer
         {
             // TODO: Add your initialization logic here
 
-            player1 = new Player(25, 400, 50, 50);
             base.Initialize();
 
             Joystick.Init();
             Console.WriteLine("Number of joysticks: " + Sdl.SDL_NumJoysticks());
             controls = new Controls();
 
-            inversionManager = new InversionManager();
-            levelManager = new LevelManager(inversionManager, player1);
         }
 
         /// <summary>
@@ -66,7 +66,6 @@ namespace Platformer
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            player1.LoadContent(this.Content);
             song = Content.Load<SoundEffect>("HawkeTheme");
             song_i = Content.Load<SoundEffect>("HawkeTheme_i");
             backSong = song.CreateInstance();
@@ -76,17 +75,8 @@ namespace Platformer
             backSong.Play();
             backSong_i.Play();
             backSong_i.Volume = 0;
-            Texture2D platformGrey = Content.Load<Texture2D>("Platform_grey");
-            Texture2D platformBlack = Content.Load<Texture2D>("Platform_black");
-            Texture2D platformWhite = Content.Load<Texture2D>("Platform_white");
-            Texture2D goal = Content.Load<Texture2D>("Goal");
-            Texture2D goal_i = Content.Load<Texture2D>("Goal_i");
-            oList[0] = new Obstacle(100, 400, 200, 50, platformGrey, platformGrey);
-            oList[1] = new Obstacle(250, 300, 200, 50, platformWhite, platformWhite);
-            oList[2] = new Obstacle(400, 200, 200, 50, platformBlack, platformBlack);
-            oList[3] = new Obstacle(550, 100, 200, 50, platformGrey, platformGrey);
 
-
+            levelManager.load();
             // TODO: use this.Content to load your game content here
         }
 
@@ -115,26 +105,24 @@ namespace Platformer
             // TODO: Add your update logic here
             //Up, down, left, right affect the coordinates of the sprite
 
-            player1.Update(controls, gameTime, oList);
+            levelManager.Update(controls, gameTime);
 
-            if (controls.onPress(Keys.Space, Buttons.A) && inversionManager.IsWorldInverted)
+            /*if (controls.onPress(Keys.Space, Buttons.A) && !player1.inverted)
             {
                 backSong_i.Volume = 0;
                 backSong.Volume = 1;
-
             }
-            else if (!inversionManager.IsWorldInverted && controls.onPress(Keys.Space, Buttons.A))
+            else if (player1.inverted && controls.onPress(Keys.Space, Buttons.A))
             {
                 backSong_i.Volume = 1;
                 backSong.Volume = 0;
+            }*/
 
-            }
-
-            if (player1.victory == true)
+            /*if (player1.victory == true)
             {
                 backSong_i.Volume = 0;
                 backSong.Volume = 0;
-            }
+            }*/
             base.Update(gameTime);
         }
 
@@ -145,27 +133,8 @@ namespace Platformer
         protected override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            if (!inversionManager.IsWorldInverted)
-            {
-                GraphicsDevice.Clear(Color.White);
-                spriteBatch.Draw(Content.Load<Texture2D>("Goal"), new Rectangle(700, 50, 50, 50), Color.White);
-            }
-            else
-            {
-                GraphicsDevice.Clear(Color.Black);
-                spriteBatch.Draw(Content.Load<Texture2D>("Goal_i"), new Rectangle(700, 50, 50, 50), Color.White);
-            }
-
+            levelManager.Draw(spriteBatch, GraphicsDevice);
             // TODO: Add your drawing code here
-            for (int i = 0; i < 4; i++) {
-                oList[i].Draw(spriteBatch, player1);
-            }
-            player1.Draw(spriteBatch);
-
-            if (player1.victory == true)
-            {
-                spriteBatch.Draw(Content.Load<Texture2D>("Victory"), new Rectangle(50, 50, 700, 400), Color.White);
-            }
 
             spriteBatch.End();
 
@@ -174,4 +143,3 @@ namespace Platformer
     }
 
 }
-

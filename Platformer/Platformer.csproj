@@ -37,10 +37,12 @@
   <ItemGroup>
     <Compile Include="AnimatedSprite.cs" />
     <Compile Include="Boss.cs" />
+    <Compile Include="CharacterManager.cs" />
     <Compile Include="InversionManager.cs" />
     <Compile Include="Invertible.cs" />
     <Compile Include="Controls.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="LevelManager.cs" />
     <Compile Include="MovementPattern.cs" />
     <Compile Include="Obstacle.cs" />

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,6 +37,26 @@ namespace Platformer
         public void registerInvertible(Invertible i)
         {
             invertibles.Add(i);
+        }
+
+        public void Draw(SpriteBatch sb, GraphicsDevice graphicsDevice)
+        {
+            if (!IsWorldInverted)
+            {
+                graphicsDevice.Clear(Color.White);
+            }
+            else
+            {
+                graphicsDevice.Clear(Color.Black);
+            }
+        }
+
+        public void Update(Controls controls)
+        {
+            if (controls.onPress(Keys.Space, Buttons.A))
+            {
+                invert();
+            }
         }
     }
 }

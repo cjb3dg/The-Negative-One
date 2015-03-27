@@ -10,7 +10,9 @@ namespace Platformer
     /* All non-neutral objects */
     abstract class Invertible : Sprite
     {
-        public bool IsInverted { get; set; } /* inverted = of inverse world */
+        public bool IsInverted = false; /* inverted = of inverse world */
+
+        public bool IsNeutral = false; /* TODO */
 
         protected bool allowInversion = true; /* should be false for objects without dual-states */
 
@@ -30,10 +32,15 @@ namespace Platformer
 
         public void invert()
         {
-            if (allowInversion)
+            if (allowInversion && !IsNeutral)
             {
                 IsInverted = !IsInverted;
             }
+        }
+
+        public void setNeutral()
+        {
+            IsNeutral = true;
         }
 
         /* prevents inversion */
@@ -45,6 +52,15 @@ namespace Platformer
         public void unlockInversion()
         {
             allowInversion = true;
+        }
+
+        public bool IsActive(InversionManager im)
+        {
+            if (IsInverted != im.IsWorldInverted)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
