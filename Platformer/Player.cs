@@ -211,13 +211,13 @@ namespace Platformer
             {
                 if (!(spriteX + spriteWidth < o.getX() || spriteX > o.getX() + o.getWidth() || spriteY + spriteHeight < o.getY() || spriteY > o.getY() + o.getHeight()))
                 {
-                    if (spriteY + spriteHeight <= o.getY() + y_vel && y_vel >= 0)
+                    if (spriteY + spriteHeight <= o.getY() + y_vel && y_vel >= 0 && spriteX + spriteWidth > o.getX() && spriteX < o.getX() + o.getWidth())
                     {
                         spriteY = o.getY() - spriteHeight;
                         grounded = true;
                         return;
                     }
-                    if (spriteY >= o.getY() + o.getHeight() + y_vel && y_vel < 0)
+                    if (spriteY >= o.getY() + o.getHeight() + y_vel && y_vel < 0 && spriteX + spriteWidth > o.getX() && spriteX < o.getX() + o.getWidth())
                     {
                         spriteY = o.getY() + o.getHeight();
                         y_vel = 0;

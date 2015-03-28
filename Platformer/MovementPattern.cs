@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,19 +9,13 @@ namespace Platformer
     {
         public List<double> xVList;
         public List<double> yVList;
-        public List<double> tList;
-        public double cycleTime;
 
-        public MovementPattern(List<double> xVList, List<double> yVList, List<double> tList)
-		{
+        public MovementPattern(List<double> xVList, List<double> yVList)
+        {
             this.xVList = xVList;
             this.yVList = yVList;
-            this.tList = tList;
-            if (tList.Count != 0)
-            {
-                this.cycleTime = tList.Sum();
-            }
 
-		}
+
+        }
     }
 }

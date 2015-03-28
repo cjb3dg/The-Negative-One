@@ -1,4 +1,4 @@
-﻿#region Using Statements
+﻿﻿#region Using Statements
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
@@ -77,6 +77,8 @@ namespace Platformer
             backSong_i.Volume = 0;
 
             levelManager.load();
+
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -107,22 +109,14 @@ namespace Platformer
 
             levelManager.Update(controls, gameTime);
 
-            /*if (controls.onPress(Keys.Space, Buttons.A) && !player1.inverted)
+            if (controls.onPress(Keys.Space, Buttons.A))
             {
-                backSong_i.Volume = 0;
-                backSong.Volume = 1;
-            }
-            else if (player1.inverted && controls.onPress(Keys.Space, Buttons.A))
-            {
-                backSong_i.Volume = 1;
-                backSong.Volume = 0;
-            }*/
+                float x = backSong_i.Volume;
+                backSong_i.Volume = backSong.Volume;
+                backSong.Volume = x;
 
-            /*if (player1.victory == true)
-            {
-                backSong_i.Volume = 0;
-                backSong.Volume = 0;
-            }*/
+            }
+
             base.Update(gameTime);
         }
 

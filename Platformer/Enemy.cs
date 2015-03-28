@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿﻿using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,13 @@ namespace Platformer
     {
         public int curHP;
         public MovementPattern mPattern;
+        public double xVel;
+        public double yVel;
+        public int mIter;
         private bool alive;
+
+        public const double delay = .5;
+        public double remainingDelay;
 
         public Enemy(int x, int y, int width, int height, Texture2D normal, Texture2D inverted, int curHP, MovementPattern mPattern) //Moving Constructor
         {
@@ -22,6 +28,7 @@ namespace Platformer
             this.image_i = inverted;
             this.curHP = curHP;
             this.mPattern = mPattern;
+            this.remainingDelay = .5;
             this.alive = true;
         }
 
@@ -38,9 +45,22 @@ namespace Platformer
             this.alive = e.alive;
         }
 
+
         public void Update(Microsoft.Xna.Framework.GameTime gameTime, List<Obstacle> oList)
         {
+            this.remainingDelay -= gameTime.ElapsedGameTime.TotalSeconds;
 
+            if (remainingDelay <= 0)
+            {
+
+                this.mIter = (this.mIter + 1) % this.mPattern.xVList.Count;
+                this.xVel = this.mPattern.xVList.ToArray()[this.mIter];
+                this.yVel = this.mPattern.yVList.ToArray()[this.mIter];
+
+                remainingDelay = delay;
+            }
+            this.spriteX += Convert.ToInt32(xVel);
+            this.spriteY += Convert.ToInt32(yVel);
         }
 
         public int getX()

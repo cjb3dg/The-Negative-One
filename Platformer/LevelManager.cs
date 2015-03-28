@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+﻿﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -77,13 +77,19 @@ namespace Platformer
             addObject(blackObstacle3);
 
             characterManager.Load();
+
+            for (int i = 0; i < characterManager.enemyList.Count; i++)
+            {
+                inversionManager.registerInvertible((Invertible)characterManager.enemyList[i]);
+            }
         }
 
         /*
          * Registers all objects with LevelManager
          * Registers all Invertibles with InversionManager
          */
-        public void setObjects(List<Sprite> objects) {
+        public void setObjects(List<Sprite> objects)
+        {
             //this.objects = objects;
 
             for (int i = 0; i < objects.Count; i++)
@@ -96,7 +102,8 @@ namespace Platformer
          * Adds a new object to LevelManager
          * If it is Invertible, it is also registered with InversionManager
          */
-        public void addObject(Sprite obj) {
+        public void addObject(Sprite obj)
+        {
             //objects.Add(obj);
 
             /* list from top of potential inheritance tree to bottom */
@@ -114,7 +121,8 @@ namespace Platformer
                 {
                     blackObstacles.Add((Obstacle)obj);
                 }
-                else {
+                else
+                {
                     whiteObstacles.Add((Obstacle)obj);
                 }
 
@@ -174,9 +182,12 @@ namespace Platformer
 
             int activeObstacleCount = neutralObstacles.Count;
 
-            if (inversionManager.IsWorldInverted) {
+            if (inversionManager.IsWorldInverted)
+            {
                 activeObstacleCount += whiteObstacles.Count;
-            } else {
+            }
+            else
+            {
                 activeObstacleCount += blackObstacles.Count;
             }
 
